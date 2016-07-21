@@ -7,9 +7,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -26,12 +26,28 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicReference;
 
+import net.jcip.annotations.ThreadSafe;
+
 /**
+ * Blocks until a value is set or an exception is thrown. This is ideal for waiting for another thread to finish. This
+ * class supports multiple listeners, but there can only be one writer thread. In other words an instance of this class
+ * can have many threads waiting for a value but only one thread can write or provide this value.
+ *
+ * <pre>
+ * final WaitForValue<String> wait = new WaitForValue<>();
+ * 
+ * // Thread 1
+ * wait.succeeded("hello");
+ * Assert.assertEquals("hello", wait.get());
+ *
+ * </pre>
  *
  * @author Albert Attard
  *
  * @param <T>
+ *          The value type
  */
+@ThreadSafe
 public class WaitForValue<T> {
 
   /** */

@@ -7,9 +7,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,17 +22,21 @@ package com.javacreed.examples.concurrency.wait;
 import java.util.concurrent.ExecutionException;
 
 /**
+ * Holds the result obtained or the error occurred while computing the result
  *
  * @author Albert Attard
  *
  * @param <E>
+ *          the type of the result
  */
 public interface OutcomeWrapper<E> {
 
   /**
+   * Returns the result or throws an {@link ExecutionException} with the error
    *
-   * @return
+   * @return the result
    * @throws ExecutionException
+   *           if an error occured while computing the result
    */
   E get() throws ExecutionException;
 }
